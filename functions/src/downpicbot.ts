@@ -7,6 +7,7 @@ import { createApi } from 'unsplash-js';
 import config from './config.json';
 
 module.exports = (downpicbot: { message: any }) => {
+    console.log("Chat ID: " + downpicbot.message.chat.id);
     // Each message contains "text" and a "chat" object, which has an "id" which is the chat id
     if (downpicbot.message && downpicbot.message.text) {
         if (downpicbot.message.text.toLowerCase().includes("marco")) {
