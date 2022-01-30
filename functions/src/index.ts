@@ -33,7 +33,7 @@ exports.dailyQuote = functions.pubsub.schedule('0 13 * * *').timeZone('Europe/Ma
         `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
         {
             chat_id: config.HERMANDAD_CHAT_ID,
-            text: "La QUOTE del día: " + config.QUOTES[Math.floor(Math.random() * config.MOODS.length)],
+            text: "La QUOTE del día: " + config.QUOTES[Math.floor(Math.random() * config.QUOTES.length)],
         }
     )
     return null;
