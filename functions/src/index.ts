@@ -39,6 +39,57 @@ exports.downpicbot = functions.https.onRequest(app);
 //     return null;
 // });
 
+exports.dekmantel = functions.pubsub.schedule('0 12 * * *').timeZone('Europe/Madrid').onRun((context) => {
+    var now = new Date().getTime();
+    var start = new Date(new Date().getFullYear(), 0, 0).getTime();
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+    const artist = config.DEKMANTEL[day - 81]; // -81 because the first day is day 81 (22 March)
+    axios.post(
+        `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+        {
+            chat_id: config.DEKMANTEL_CHAT_ID,
+            text: `Escucha al artista del día: ${artist}.`,
+        }
+    )
+    return null;
+});
+
+exports.diegoBirthday = functions.pubsub.schedule('0 0 17 1 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/01/17');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Dieguinos 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+exports.bertinosBirthday = functions.pubsub.schedule('0 0 18 1 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/01/18');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Bertinos 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
 exports.bufaBirthday = functions.pubsub.schedule('0 0 14 2 *').timeZone('Europe/Madrid').onRun((context) => {
     const today = new Date();
     const birthDate = new Date('1992/02/14');
@@ -84,6 +135,129 @@ exports.brunoBirthday = functions.pubsub.schedule('0 0 25 3 *').timeZone('Europe
             {
                 chat_id: config.HERMANDAD_CHAT_ID,
                 text: `🎉 Felicitaciones Bruneleski 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+exports.castaBirthday = functions.pubsub.schedule('0 0 24 4 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1990/04/24');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Castañes 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+exports.navesBirthday = functions.pubsub.schedule('0 0 28 5 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/05/28');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Navitos 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+exports.arguBirthday = functions.pubsub.schedule('0 0 15 7 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/07/15');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Argoils 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+
+exports.vityBirthday = functions.pubsub.schedule('0 0 14 8 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/08/14');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Vitor 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+
+exports.penaBirthday = functions.pubsub.schedule('0 0 4 10 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1991/10/04');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Peñita 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+
+exports.didiBirthday = functions.pubsub.schedule('0 0 30 10 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/10/30');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Navitos 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
+            }
+        )
+    });
+    return null;
+});
+
+
+exports.guilleBirthday = functions.pubsub.schedule('0 0 5 12 *').timeZone('Europe/Madrid').onRun((context) => {
+    const today = new Date();
+    const birthDate = new Date('1992/12/05');
+    var age = today.getFullYear() - birthDate.getFullYear();
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&safeSearch=none&maxResults=1&q=birthdayhappy&order=date&type=video&key=${config.GCLOUD_API_KEY}`;
+    axios.get(url).then((result: any) => {
+        axios.post(
+            `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
+            {
+                chat_id: config.HERMANDAD_CHAT_ID,
+                text: `🎉 Felicitaciones Guille 🎉. Hoy cumples ${age} años, ${age * 365} días, ${age * 365 * 24} horas o ${age * 365 * 24 * 60} minutos, escoge la cifra que más te guste 🥳. ¡Enhorabuena, que tengas un buen día! 🎂 Disfruta del siguiente vídeo: https://www.youtube.com/watch?v=${result.data.items[0].id.videoId}`,
             }
         )
     });
