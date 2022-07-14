@@ -39,23 +39,6 @@ exports.downpicbot = functions.https.onRequest(app);
 //     return null;
 // });
 
-exports.dekmantel = functions.pubsub.schedule('0 12 * * *').timeZone('Europe/Madrid').onRun((context) => {
-    var now = new Date().getTime();
-    var start = new Date(new Date().getFullYear(), 0, 0).getTime();
-    var diff = now - start;
-    var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay);
-    const artist = config.DEKMANTEL[day - 81]; // -81 because the first day is day 81 (22 March)
-    axios.post(
-        `https://api.telegram.org/bot${config.API_TOKEN_TELEGRAM}/sendMessage`,
-        {
-            chat_id: config.DEKMANTEL_CHAT_ID,
-            text: `Escucha al artista del día: ${artist}.`,
-        }
-    )
-    return null;
-});
-
 exports.diegoBirthday = functions.pubsub.schedule('0 0 17 1 *').timeZone('Europe/Madrid').onRun((context) => {
     const today = new Date();
     const birthDate = new Date('1992/01/17');
@@ -175,7 +158,7 @@ exports.navesBirthday = functions.pubsub.schedule('0 0 28 5 *').timeZone('Europe
     return null;
 });
 
-exports.arguBirthday = functions.pubsub.schedule('0 0 15 7 *').timeZone('Europe/Madrid').onRun((context) => {
+exports.arguBirthday = functions.pubsub.schedule('0 22 14 7 *').timeZone('Europe/Madrid').onRun((context) => {
     const today = new Date();
     const birthDate = new Date('1992/07/15');
     var age = today.getFullYear() - birthDate.getFullYear();
@@ -193,7 +176,7 @@ exports.arguBirthday = functions.pubsub.schedule('0 0 15 7 *').timeZone('Europe/
 });
 
 
-exports.vityBirthday = functions.pubsub.schedule('0 0 14 8 *').timeZone('Europe/Madrid').onRun((context) => {
+exports.vityBirthday = functions.pubsub.schedule('0 0 15 8 *').timeZone('Europe/Madrid').onRun((context) => {
     const today = new Date();
     const birthDate = new Date('1992/08/14');
     var age = today.getFullYear() - birthDate.getFullYear();
